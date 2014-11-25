@@ -1,0 +1,41 @@
+<div>
+  <div class="row">
+    <div class="col-sm-12"><leaflet height="400" tiles="tiles" center="raleigh"></leaflet></div>
+  </div>
+  <div class="row">
+    <select class="form-control" ng-options="item as item.label for item in actStatus" ng-model="selectedStatus" ng-change="statusChanged()"></select>
+    <br/>
+    <input class="form-control" placeholder="Search By Encroachment Address" type="text" ng-model="selectedAddress" typeahead="f.properties.address for f in lots.features | filter:$viewValue | orderBy:['properties.address'] | limitTo:5 " typeahead-on-select="addressSelected($item, $model, $label)"/>
+  </div>
+  <div class="row well">
+    <div class="progress" ng-show="searching">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+      </div>
+    </div>  
+
+    <center class="lead" ng-show="!selectedLot && !searching">Click on a lot on the map to view information</center>
+    <center ng-show="selectedLot && !searching">
+      <p class="lead">{{ address }}</p>
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>Contractor</th>
+            <th>Authorized Work</th>
+            <th>Effective</th>
+            <th>Expires</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="lot in selectedLot" ng-class="{'success': lot.active, 'danger': !lot.active}">
+            <td>{{ lot.PERM_CONTRACTOR_NAME }}</td>
+            <td>{{ lot.PERM_AUTHORIZED_WORK }}</td>
+            <td>{{ lot.ENCROACH_DATE_EFFECT }}</td>
+            <td>{{ lot.ENCROACH_DATE_EXPIRE }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </center>
+  </div>
+
+</div>
