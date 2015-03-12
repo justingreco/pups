@@ -17,7 +17,7 @@ angular.module('pupApp')
           order: 'encroach_date_effect desc'
         }
       ];
-    $scope.selectedStatus = $scope.actStatus[0];
+    $scope.selectedStatus = $scope.actStatus[1];
     $scope.address = '';
     $scope.id = 0;
     angular.extend($scope, {

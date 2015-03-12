@@ -16,6 +16,7 @@
     <center class="lead" ng-show="!selectedLot && !searching">Click on a lot on the map to view information</center>
     <center ng-show="selectedLot && !searching">
       <p class="lead">{{ address }}</p>
+      <input class="form-control" placeholder="Filter by name or authorized work type" ng-model="vendorFilter"/>
       <table class="table table-responsive">
         <thead>
           <tr>
@@ -26,7 +27,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="lot in selectedLot" ng-class="{'success': lot.active, 'danger': !lot.active}">
+          <tr ng-repeat="lot in selectedLot | filter: vendorFilter" ng-class="{'success': lot.active, 'danger': !lot.active}">
             <td>{{ lot.PERM_CONTRACTOR_NAME }}</td>
             <td>{{ lot.PERM_AUTHORIZED_WORK }}</td>
             <td>{{ lot.ENCROACH_DATE_EFFECT }}</td>
